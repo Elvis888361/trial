@@ -118,7 +118,7 @@
             }
   </style>
                     <?php
- $con = mysqli_connect("localhost","root","","userreg");
+ $con = mysqli_connect("cloudways","juuspxczhv","rMwyqF8G6U","userreg");
 
         if(!$con)
         {
