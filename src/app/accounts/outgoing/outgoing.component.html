@@ -1,0 +1,165 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col fw-bold text-center fs-6">Outgoing Payments</div>
+
+        <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end">
+          <!-- <ul class="nav justify-content-center">
+            <div class="btn-group btn-group-sm">
+              <a class="btn btn-outline-primary" id="kes" aria-current="page"
+                >KES</a
+              >
+              <a class="btn btn-outline-primary" id="usd">USD</a>
+            </div>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+    <div class="card-body container">
+      <form
+        class="row g-2"
+        [formGroup]="accSvc.outgoingForm"
+        autocomplete="off"
+      >
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="bx bxs-calendar"></i>
+              </div>
+            </div>
+            <input
+              formControlName="TransactionDate"
+              type="date"
+              class="form-control"
+              placeholder="Payment Date"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="bx bx-money"></i>
+              </div>
+            </div>
+            <select
+              class="form-select"
+              aria-label=""
+              formControlName="CurrencyID"
+              (change)="getCurrency($event)"
+            >
+              <option value="0" hidden selected>--Select Currency--</option>
+              <option *ngFor="let curr of currencies" [value]="curr.CurrencyID">
+                {{ curr.CurrAbbvr }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="bx bxs-checkbox-checked"></i>
+              </div>
+            </div>
+            <select
+              class="form-select"
+              formControlName="SupplierID"
+              aria-label=""
+              (change)="getSupplier($event)"
+            >
+              <option value="0" hidden selected>--Select Supplier--</option>
+              <option *ngFor="let sup of suppliers" [value]="sup.SupplierID">
+                {{ sup.SupplierName }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="bx bxs-coin"></i>
+              </div>
+            </div>
+            <input
+              type="text"
+              readonly
+              class="form-control"
+              id="pending"
+              placeholder="Payable Amount"
+              digitOnly
+              [min]="1"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="bx bxs-coin"></i>
+              </div>
+            </div>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="Amount"
+              placeholder="Amount"
+              digitOnly
+              [min]="1"
+            />
+          </div>
+        </div>
+      </form>
+      <div class="col-md-12 mt-4">
+        <table
+          id="myTable"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+          class="compact hover cell-border"
+          style="width: 100%"
+        >
+          <thead>
+            <tr>
+              <th></th>
+              <th>Invoice No</th>
+              <th>Date</th>
+              <th>Document</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let inv of invoices; let i = index">
+              <td><input type="checkbox" style="margin-left: 6px" /></td>
+              <td>{{ inv.InvoiceNo }}</td>
+              <td>{{ inv.InvoiceDate | date : "dd/MM/yyyy" }}</td>
+              <td>{{ inv.DocType }}</td>
+              <td>
+                {{
+                  inv.CurrencyID == 1
+                    ? (inv.Balance | currency : "KES ")
+                    : (inv.Balance | currency : "USD ")
+                }}
+              </td>
+              <td>{{ inv.InvoiceID }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        type="button"
+        class="btn btn-primary btn-sm btn-success"
+        appSingleClickDirective
+        (singleClick)="onSubmit()"
+      >
+        <i class="bx bxs-data"></i> Make Payment
+      </button>
+    </div>
+  </div>
+</div>

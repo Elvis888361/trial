@@ -1,0 +1,52 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col fw-bold text-center fs-6">Depot List</div>
+
+        <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            (click)="openDialog(null)"
+          >
+            <span><i class="bx bx-plus"></i></span> New Depot
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="compact hover cell-border"
+        style="width: 100%"
+      >
+        <thead>
+          <tr>
+            <th>Depot Name</th>
+            <th style="width: 3%"></th>
+            <th style="width: 3%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dep of depots">
+            <td>{{ dep.DepotName }}</td>
+
+            <td>
+              <span style="color: green" (click)="openDialog(dep)">
+                <i class="bx bxs-edit bx-sm"></i>
+              </span>
+            </td>
+            <td>
+              <span style="color: Tomato">
+                <i class="bx bx-trash bx-sm"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

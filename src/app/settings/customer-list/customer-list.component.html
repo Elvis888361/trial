@@ -1,0 +1,52 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col fw-bold text-center fs-6">Customer List</div>
+
+        <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            (click)="openDialog(null)"
+          >
+            <span><i class="bx bx-plus"></i></span> New Customer
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="compact hover cell-border"
+        style="width: 100%"
+      >
+        <thead>
+          <tr>
+            <th>Customer Name</th>
+            <th style="width: 3%"></th>
+            <th style="width: 3%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cus of customers">
+            <td>{{ cus.CustomerName }}</td>
+
+            <td>
+              <span style="color: green" (click)="openDialog(cus)">
+                <i class="bx bxs-edit bx-sm"></i>
+              </span>
+            </td>
+            <td>
+              <span style="color: Tomato">
+                <i class="bx bx-trash bx-sm"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

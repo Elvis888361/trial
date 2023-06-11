@@ -1,0 +1,90 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Luqman</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ">
+            <a class="nav-item nav-link active" [routerLink]="['/ots/orders']" routerLinkActive="active">Order </a>
+            <a class="nav-item nav-link" [routerLink]="['/ots/discharge-instructions']" routerLinkActive="active">Discharge Instructions</a>
+            <a class="nav-item nav-link" [routerLink]="['/ots/receive-stock']" routerLinkActive="active">Receive Stock</a>
+            <a class="nav-item nav-link"  [routerLink]="['/ots/manage-entries']" routerLinkActive="active">Manage Entries</a>
+            <a class="nav-item nav-link"  [routerLink]="['/ots/demmurage']" routerLinkActive="active">Demmurage</a>
+            <a class="nav-item nav-link "  [routerLink]="['/ots/cn-dn']" routerLinkActive="active">Manage Cn/Dn</a>
+          </div>
+        </div> 
+      </nav>
+      <div class="row">
+        <div class="col fw-bold text-center fs-6">
+          Pending Discharge Instructions List
+        </div>
+
+        <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            [routerLink]="['/ots/discharge-instructions-history']"
+          >
+            <span><i class="bx bx-history"></i></span> History
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="compact hover cell-border"
+        style="width: 100%"
+      >
+        <thead>
+          <tr>
+            <th>Cargo No</th>
+            <th style="width: 12%">Date Range</th>
+            <th>Tender</th>
+            <th>Pricing</th>
+            <th style="width: 25%">Supplier</th>
+            <th>Product</th>
+            <th>MOE</th>
+            <th>Actual</th>
+            <th>Local</th>
+            <th>Transit</th>
+            <th>Linefill</th>
+            <th>Tender Month</th>
+            <th>Year</th>
+            <th>Premium</th>
+
+            <th style="width: 3%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tender of tenders">
+            <td>{{ tender.CargoNo }}</td>
+            <td>{{ tender.DateRange }}</td>
+            <td>{{ tender.TenderType }}</td>
+            <td>{{ tender.PriceMonth }}</td>
+            <td style="width: 20%">{{ tender.SupplierName }}</td>
+            <td>{{ tender.ProductName }}</td>
+            <td>{{ tender.Allocation }}</td>
+            <td>{{ tender.Actual }}</td>
+            <td>{{ tender.Local }}</td>
+            <td>{{ tender.Transit }}</td>
+            <td>{{ tender.Linefill }}</td>
+            <td>{{ tender.TMonth }}</td>
+            <td>{{ tender.YearName }}</td>
+            <td>{{ tender.Premium }}</td>
+            <td>
+              <span style="color: green" (click)="openDialog(tender)">
+                <i class="bx bxs-edit bx-sm"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

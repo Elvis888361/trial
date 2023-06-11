@@ -1,0 +1,93 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Invoice</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form class="row g-2" [formGroup]="orderSvc.invoiceForm" autocomplete="off">
+    <div class="col-md-6">
+      <input type="hidden" formControlName="InvoiceID" />
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-calendar"></i>
+          </div>
+        </div>
+        <input
+          type="date"
+          class="form-control"
+          formControlName="InvoiceDate"
+          placeholder="Invoice Date"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-file"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="InvoiceNo"
+          placeholder="Invoice No"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-bitcoin"></i>
+          </div>
+        </div>
+        <select
+          class="form-control"
+          formControlName="CurrencyID"
+          (change)="currencyChange($event)"
+        >
+          <option value="" hidden>--Currency--</option>
+          <option *ngFor="let curr of currencies" [value]="curr.CurrencyID">
+            {{ curr.CurrAbbvr }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-coin-stack"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="Amount"
+          placeholder="Amount"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="orderSvc.invoiceForm.invalid"
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+  >
+    <i class="bx bx-save"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-window-close"></i> Close
+  </button>
+</div>

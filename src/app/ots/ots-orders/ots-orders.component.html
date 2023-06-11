@@ -1,0 +1,115 @@
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Luqman</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" [routerLink]="['/ots/orders']" routerLinkActive="active">Order </a>
+            <a class="nav-item nav-link" [routerLink]="['/ots/discharge-instructions']" routerLinkActive="active">Discharge Instructions</a>
+            <a class="nav-item nav-link"  [routerLink]="['/ots/receive-stock']" routerLinkActive="active">Receive Stock</a>
+            <a class="nav-item nav-link"  [routerLink]="['/ots/manage-entries']" routerLinkActive="active">Manage Entries</a>
+            <a class="nav-item nav-link"  [routerLink]="['/ots/demmurage']" routerLinkActive="active">Demmurage</a>
+            <a class="nav-item nav-link"  [routerLink]="['/ots/cn-dn']" routerLinkActive="active">Manage Cn/Dn</a>
+          </div>
+        </div> 
+      </nav>
+      <div class="row">
+        <div class="col fw-bold text-center fs-6">Orders</div>
+
+        <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            (click)="openDialog(null)"
+          >
+            <span><i class="bx bx-plus"></i></span> New Order
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="compact hover cell-border"
+        style="width: 100%"
+      >
+        <thead>
+          <tr>
+            <th colspan="10"></th>
+            <th colspan="2">Order Qty</th>
+            <th colspan="2">OTR Qty</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th>Cargo No</th>
+            <th style="width: 15%">Supplier</th>
+            <th>Product</th>
+            <th>Vessel</th>
+            <th>Mode</th>
+            <th>USD</th>
+            <th>KES</th>
+            <th>Status</th>
+            <th>Depot</th>
+            <th>Tender</th>
+            <th>MT</th>
+            <th>M3</th>
+            <th>MT</th>
+            <th>M3</th>
+            <th style="width: 3%"></th>
+            <th style="width: 3%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of orders">
+            <td>{{ o.CargoNo }}</td>
+            <td>{{ o.SupplierName }}</td>
+            <td>{{ o.ProductName }}</td>
+            <td>{{ o.Vessel }}</td>
+            <td>{{ o.Mode }}</td>
+            <td>{{ o.Usd | currency : " " }}</td>
+            <td>{{ o.Ksh | currency : " " }}</td>
+            <td>{{ o.Status }}</td>
+            <td>{{ o.DepotName }}</td>
+            <td>{{ o.TenderType }}</td>
+            <td>{{ o.MT }}</td>
+            <td>{{ o.M3 }}</td>
+            <td>{{ o.MtNew }}</td>
+            <td>{{ o.M3New }}</td>
+
+            <td>
+              <span
+                style="color: maroon"
+                (click)="openDialog(o)"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Update Invoices"
+              >
+                <i class="bx bx-dollar-circle bx-sm"></i>
+              </span>
+            </td>
+            <td>
+              <span
+                style="color: blue"
+                (click)="openOuturnDialog(o)"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Outurn Chnages"
+                *ngIf="o.Status == 'Paid'"
+              >
+                <i class="bx bx-transfer-alt bx-sm"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

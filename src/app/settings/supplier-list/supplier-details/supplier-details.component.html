@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Supplier Details</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form class="row g-2" [formGroup]="supSvc.supplierForm" autocomplete="off">
+    <input type="hidden" formControlName="SupplierID" />
+    <div class="col-md-12">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-user-pin"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="SupplierName"
+          placeholder="Supplier name"
+        />
+      </div>
+    </div>
+    <div class="row col-md-8">
+      <label *ngFor="let cr of currList">
+        <input
+          type="checkbox"
+          name="{{ cr.CurrAbbvr }}"
+          [(ngModel)]="cr.IsSelected"
+          class="form-check-input"
+        />
+        {{ cr.CurrAbbvr }}
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-check mt-2 mx-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="active"
+          formControlName="IsActive"
+        />
+        <label class="form-check-label" for="active"> Active </label>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="supSvc.supplierForm.invalid"
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+  >
+    <i class="bx bxs-data"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-window-close"></i> Close
+  </button>
+</div>

@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Upload File</h4>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-9">
+      <input
+        class="form-control form-control-sm"
+        type="file"
+        #fileInput
+        (change)="selectFile($event)"
+      />
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-primary btn-sm" (click)="uploadFile()">
+        Upload
+      </button>
+    </div>
+  </div>
+</div>
+<div class="modal-footer mx-auto">
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-exit"></i> Close
+  </button>
+</div>

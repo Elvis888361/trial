@@ -1,0 +1,69 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col fw-bold text-center fs-6">Tender List</div>
+
+        <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            (click)="openDialog(null)"
+          >
+            <span><i class="bx bx-plus"></i></span> New Tender
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="compact hover cell-border"
+        style="width: 100%"
+      >
+        <thead>
+          <tr>
+            <th>Cargo No</th>
+            <th>Date Range</th>
+            <th>Tender</th>
+            <th>Pricing</th>
+            <th>Supplier</th>
+            <th>Product</th>
+            <th>Allocation (MT)</th>
+            <th>Tender Month</th>
+            <th>Year</th>
+            <th>Premium</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tender of tenders">
+            <td>{{ tender.CargoNo }}</td>
+            <td>{{ tender.DateRange }}</td>
+            <td>{{ tender.TenderType }}</td>
+            <td>{{ tender.PriceMonth }}</td>
+            <td style="width: 20%">{{ tender.SupplierName }}</td>
+            <td>{{ tender.ProductName }}</td>
+            <td>{{ tender.Allocation }}</td>
+            <td>{{ tender.TMonth }}</td>
+            <td>{{ tender.YearName }}</td>
+            <td>{{ tender.Premium }}</td>
+            <td>
+              <span style="color: green" (click)="openDialog(tender)">
+                <i class="bx bxs-edit bx-sm"></i>
+              </span>
+            </td>
+            <td>
+              <span style="color: Tomato">
+                <i class="bx bx-trash bx-sm"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Depot Details</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form class="row g-2" [formGroup]="commSvc.depotForm" autocomplete="off">
+    <input type="hidden" formControlName="DepotID" />
+    <div class="col-md-12">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-data"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="DepotName"
+          placeholder="Depot name"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="commSvc.depotForm.invalid"
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+  >
+    <i class="bx bxs-data"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-window-close"></i> Close
+  </button>
+</div>

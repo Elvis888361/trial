@@ -1,0 +1,140 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Ase Details</h4>
+</div>
+<div class="modal-body col-md-12">
+  <div class="row g-2">
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-shopping-bag"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          placeholder="Cargo No"
+          [(ngModel)]="order.CargoNo"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-ship"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control text-uppercase"
+          placeholder="Vessel"
+          [(ngModel)]="order.Vessel"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-user-pin"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          placeholder="Supplier"
+          [(ngModel)]="order.SupplierName"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-check-square"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          placeholder="Product"
+          [(ngModel)]="order.ProductName"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-check-square"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          placeholder="Mode"
+          [(ngModel)]="order.Mode"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-data"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          placeholder="Depot"
+          [(ngModel)]="order.DepotName"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet-half"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          readonly
+          class="form-control"
+          placeholder="Qty(M3)"
+          [(ngModel)]="order.M3New"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet-half"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          readonly
+          class="form-control"
+          [(ngModel)]="order.MtNew"
+          placeholder="Qty(MT)"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer"></div>

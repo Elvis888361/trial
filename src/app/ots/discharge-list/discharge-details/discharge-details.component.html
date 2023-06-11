@@ -1,0 +1,158 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Discharge Instructions Details</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form
+    class="row g-2"
+    [formGroup]="tenderSvc.dischargeHeaderForm"
+    autocomplete="off"
+  >
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-calendar"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          formControlName="DateRange"
+          placeholder="Date Range"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-ship"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control text-uppercase"
+          formControlName="Vessel"
+          placeholder="Vessel"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          readonly
+          class="form-control"
+          formControlName="Allocation"
+          placeholder="Moe alloation"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="Actual"
+          placeholder="Actual quantity"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+  </form>
+  <div class="row mt-2 mb-2">
+    <div class="col-md-12">
+      <button
+        type="button"
+        [disabled]="tenderSvc.dischargeHeaderForm.invalid"
+        class="btn btn-primary btn-sm float-end"
+        (click)="addDischargeItem(null, OtsTenderID)"
+      >
+        <i class="bx bx-plus"></i>
+        Add Item
+      </button>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      class="compact hover cell-border"
+      style="width: 100%"
+    >
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Qty (MT)</th>
+          <th>Depot</th>
+          <th>Destination</th>
+          <th style="width: 30%">Consignee</th>
+          <th style="width: 3%"></th>
+          <th style="width: 3%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let discharge of tenderSvc.dischargeDetails; let i = index">
+          <td>{{ discharge.Status }}</td>
+          <td>{{ discharge.Quantity }}</td>
+          <td>{{ discharge.DepotName }}</td>
+          <td>{{ discharge.DestinationName }}</td>
+          <td>{{ discharge.CustomerName }}</td>
+          <td>
+            <span
+              style="color: green"
+              (click)="addDischargeItem(i, OtsTenderID)"
+            >
+              <i class="bx bxs-edit bx-sm"></i>
+            </span>
+          </td>
+          <td>
+            <span
+              style="color: Tomato"
+              (click)="deleteDischarge(discharge.DischargeID)"
+            >
+              <i class="bx bx-trash bx-sm"></i>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="
+      tenderSvc.dischargeHeaderForm.invalid ||
+      tenderSvc.dischargeDetails.length == 0
+    "
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+  >
+    <i class="fa-solid fa-database"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="fa-solid fa-xmark"></i> Close
+  </button>
+</div>

@@ -1,0 +1,126 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Discharge Item</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form
+    class="row g-2"
+    [formGroup]="tenderSvc.dischargeItemForm"
+    autocomplete="off"
+  >
+    <div class="col-md-12">
+      <input type="hidden" formControlName="DischargeID" />
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="Quantity"
+          placeholder="Quantity"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-check-square"></i>
+          </div>
+        </div>
+        <select class="form-select" formControlName="Status" aria-label="">
+          <option value="" hidden selected>--Select Status--</option>
+          <option value="Local">Local</option>
+          <option value="Transit">Transit</option>
+          <option value="Linefill">Linefill</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-data"></i>
+          </div>
+        </div>
+        <select
+          class="form-control"
+          formControlName="DepotID"
+          (change)="depotChange($event)"
+        >
+          <option value="" hidden>--Depot--</option>
+          <option *ngFor="let depot of depots" [value]="depot.DepotID">
+            {{ depot.DepotName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-map"></i>
+          </div>
+        </div>
+        <select
+          class="form-control"
+          formControlName="DestinationID"
+          (change)="destinationChange($event)"
+        >
+          <option value="" hidden>--Destination--</option>
+          <option
+            *ngFor="let destination of destinations"
+            [value]="destination.DestinationID"
+          >
+            {{ destination.DestinationName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-user-circle"></i>
+          </div>
+        </div>
+        <select
+          class="form-control"
+          formControlName="CustomerID"
+          (change)="customerChange($event)"
+        >
+          <option value="" hidden>--Customer--</option>
+          <option
+            *ngFor="let customer of customers"
+            [value]="customer.CustomerID"
+          >
+            {{ customer.CustomerName }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="tenderSvc.dischargeItemForm.invalid"
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+  >
+    <i class="bx bx-save"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-window-close"></i> Close
+  </button>
+</div>

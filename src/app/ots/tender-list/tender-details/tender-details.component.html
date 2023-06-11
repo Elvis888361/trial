@@ -1,0 +1,182 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Tender Details</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form class="row g-2" [formGroup]="tenderSvc.tenderForm" autocomplete="off">
+    <input type="hidden" formControlName="OtsTenderID" />
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-ship"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="CargoNo"
+          placeholder="Cargo No"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-calendar"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="DateRange"
+          placeholder="Date Range"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-check-square"></i>
+          </div>
+        </div>
+        <select class="form-control" formControlName="SupplierID">
+          <option value="0" hidden>--Select Supplier--</option>
+          <option *ngFor="let sup of suppliers" [value]="sup.SupplierID">
+            {{ sup.SupplierName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-check-square"></i>
+          </div>
+        </div>
+        <select class="form-control" formControlName="ProductID" required>
+          <option value="0" hidden>--Select Product--</option>
+          <option *ngFor="let prod of products" [value]="prod.ProductID">
+            {{ prod.ProductName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-check-square"></i>
+          </div>
+        </div>
+        <select class="form-select" formControlName="TenderType" aria-label="">
+          <option value="" hidden selected>--Select Tender--</option>
+          <option value="KOT">KOT</option>
+          <option value="SOT">SOT</option>
+          <option value="VTTI">VTTI</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-check-square"></i>
+          </div>
+        </div>
+        <select class="form-control" formControlName="TenderMonth">
+          <option value="0" hidden>--Tender Month--</option>
+          <option *ngFor="let month of months" [value]="month.MonthID">
+            {{ month.MonthName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-check-square"></i>
+          </div>
+        </div>
+        <select class="form-control" formControlName="PricingMonth">
+          <option value="0" hidden>--Pricing Month--</option>
+          <option *ngFor="let month of months" [value]="month.MonthID">
+            {{ month.MonthName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-check-square"></i>
+          </div>
+        </div>
+        <select class="form-control" formControlName="YearID" required>
+          <option value="0" hidden>--Select Year--</option>
+          <option *ngFor="let yr of years" [value]="yr.YearID">
+            {{ yr.YearName }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bx-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="Allocation"
+          placeholder="Allocation (MT)"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-coin-stack"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="Premium"
+          placeholder="Premium"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="tenderSvc.tenderForm.invalid"
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+  >
+    <i class="bx bxs-data"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-window-close"></i> Close
+  </button>
+</div>

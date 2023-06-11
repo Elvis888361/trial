@@ -1,0 +1,171 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Invoice Details</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form
+    class="row g-2"
+    [formGroup]="orderSvc.orderHeaderForm"
+    autocomplete="off"
+  >
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-shopping-bag"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          formControlName="CargoNo"
+          placeholder="Cargo No"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-ship"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control text-uppercase"
+          formControlName="Vessel"
+          placeholder="Vessel"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-user-pin"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          formControlName="SupplierName"
+          placeholder="Supplier"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-check-square"></i>
+          </div>
+        </div>
+        <input
+          type="text"
+          readonly
+          class="form-control"
+          formControlName="Mode"
+          placeholder="Mode"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet-half"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="M3"
+          placeholder="Qty(M3)"
+          digitOnly
+          [min]="1"
+        />
+      </div>
+    </div>
+  </form>
+  <div class="row mt-2 mb-2">
+    <div class="col-md-12">
+      <button
+        type="button"
+        class="btn btn-primary btn-sm float-end"
+        [disabled]="orderSvc.orderHeaderForm.invalid"
+        (click)="addInvoiceItem(null, OtsOrderID)"
+      >
+        <i class="bx bx-plus"></i>
+        Add Invoice
+      </button>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      class="compact hover cell-border"
+      style="width: 100%"
+    >
+      <thead>
+        <tr>
+          <th>Invoice No</th>
+          <th>Date</th>
+          <th>Currency</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th style="width: 3%"></th>
+          <th style="width: 3%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let od of orderSvc.orderInvoiceDetails; let i = index">
+          <td>{{ od.InvoiceNo }}</td>
+          <td>{{ od.InvoiceDate | date : "dd/MM/yyyy" }}</td>
+          <td>{{ od.CurrAbbvr }}</td>
+          <td>
+            {{
+              od.CurrencyID == 1
+                ? (od.Amount | currency : "KES ")
+                : (od.Amount | currency : "USD ")
+            }}
+          </td>
+          <td>{{ od.Status }}</td>
+          <td>
+            <span style="color: green" (click)="addInvoiceItem(i, OtsOrderID)">
+              <i class="bx bxs-edit bx-sm"></i>
+            </span>
+          </td>
+          <td>
+            <span style="color: Tomato" (click)="deleteInvoice(od.InvoiceID)">
+              <i class="bx bx-trash bx-sm"></i>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="orderSvc.orderHeaderForm.invalid"
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+    [disabled]="orderSvc.orderInvoiceDetails.length == 0"
+  >
+    <i class="bx bxs-data"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-window-close"></i> Close
+  </button>
+</div>

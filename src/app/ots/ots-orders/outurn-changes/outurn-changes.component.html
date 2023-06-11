@@ -1,0 +1,92 @@
+<div class="modal-header">
+  <h4 class="modal-title mx-auto">Outurn Changes</h4>
+</div>
+<div class="modal-body col-md-12">
+  <form class="row g-2" [formGroup]="orderSvc.outurnForm" autocomplete="off">
+    <div class="col-md-6">
+      <label class="form-label">MT</label>
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          readonly
+          class="form-control"
+          formControlName="MT"
+          placeholder="MT"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">M3</label>
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          readonly
+          class="form-control"
+          formControlName="M3"
+          placeholder="M3"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Actual Qty(MT)</label>
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="MtNew"
+          placeholder="New quantity(MT)"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Actual Qty(M3)</label>
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="bx bxs-droplet"></i>
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="M3New"
+          placeholder="New quantity(M3)"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm btn-success"
+    [disabled]="orderSvc.outurnForm.invalid"
+    appSingleClickDirective
+    (singleClick)="onSubmit()"
+  >
+    <i class="bx bxs-data"></i> Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm btn-danger"
+    data-dismiss="modal"
+    (click)="closeModal('close')"
+  >
+    <i class="bx bx-window-close"></i> Close
+  </button>
+</div>
